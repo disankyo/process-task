@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DatapTables">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="autoDelimitKeywords" value="true"/>
+
+        <plugin type="com.tigerye.basic.common.mbg.plugin.MysqlLimitPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.VirtualPrimaryKeyPlugin"/>
+        <plugin type="com.tigerye.basic.common.mbg.plugin.MysqlInsertUpdatePlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/data-pipeline"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.tigerye.process.service.pipeline.po" targetProject="MAVEN">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.tigerye.process.service.pipeline.sqlmap"  targetProject="MAVEN">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.tigerye.process.service.pipeline.mapper"  targetProject="MAVEN">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="process_log"
+               domainObjectName="ProcessLogPo"
+               enableInsert="true"
+               enableUpdateByPrimaryKey="true"
+               enableUpdateByExample="true"
+               enableDeleteByPrimaryKey="true"
+               enableDeleteByExample="true">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+            <columnOverride column="pid" property="pid" />
+            <columnOverride column="ip" property="ip" />
+            <columnOverride column="create_time" property="createTime" />
+            <columnOverride column="update_time" property="updateTime" />
+            <columnOverride column="is_deleted" property="isDeleted" />
+        </table>
+
+
+    </context>
+
+
+</generatorConfiguration>
